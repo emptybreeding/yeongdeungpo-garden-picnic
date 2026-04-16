@@ -18,10 +18,13 @@
   --danger: #db4747;
   --marker-color: #ff5e3d;
   --marker-done: #7c8591;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -118,20 +121,25 @@ img {
 .intro-title {
   margin: 0;
   font-size: clamp(2rem, 6vw, 3.5rem);
-  line-height: 1.14;
+  line-height: 1.18;
   font-weight: 900;
   letter-spacing: -0.05em;
   text-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
-.intro-desc {
-  margin: 14px 0 28px;
-  font-size: 1rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.82);
+/* '2026 영등포공원' — 기본 크기 */
+.intro-title-first {
+  display: inline;
+}
+
+/* '정원소풍' — 1.3배 크게 */
+.intro-title-second {
+  display: inline;
+  font-size: 1.3em;
 }
 
 .intro-enter-btn {
+  margin-top: 28px;
   min-width: 220px;
   padding: 18px 30px;
   border-radius: 999px;
@@ -273,139 +281,171 @@ img {
 }
 
 /* ─── APP SCREEN ─────────────────────────────────────── */
+/* 지도가 전체 화면을 차지하고, topbar는 그 위에 오버레이 */
 .app-screen {
   position: fixed;
   inset: 0;
   overflow: hidden;
   background: #000;
-  display: flex;
-  flex-direction: column;
 }
 
-/* ─── TOPBAR ─────────────────────────────────────────── */
+/* ─── TOPBAR (지도 위 고정 오버레이) ─────────────────── */
 .topbar {
-  position: relative;
-  z-index: 5;
-  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
   padding:
-    calc(env(safe-area-inset-top) + 18px)
+    calc(var(--safe-top) + 14px)
     16px
-    14px;
+    10px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  pointer-events: none; /* 지도 터치를 막지 않도록 */
 }
 
 .topbar-title-row {
   display: flex;
   justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  margin-top: 6px;
 }
 
 .topbar-title-wrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
   text-align: center;
-  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  font-size: 20px;
   line-height: 1.2;
   font-weight: 900;
   letter-spacing: -0.05em;
-  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.52);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
 }
 
-.topbar-nickname-text,
-.topbar-brand-text {
+.topbar-nickname-text {
   color: #fff;
+  font-size: 20px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
 }
 
+.topbar-brand-text {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 20px;
+  font-weight: 800;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* 마이페이지 + 완료/남은 여행지 — 같은 행에 배치 */
 .topbar-action-row {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 12px;
+  width: 100%;
+  pointer-events: auto;
 }
 
 .topbar-mypage-btn {
-  justify-self: start;
-  min-height: 58px;
-  padding: 0 22px;
+  flex-shrink: 0;
+  min-width: 102px;
+  height: 42px;
+  padding: 0 18px;
   border-radius: 999px;
-  background: var(--pill);
-  border: 1px solid var(--pill-border);
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   color: #fff;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 900;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  pointer-events: auto;
   box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.28),
+    0 8px 22px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: background 0.15s ease;
+}
+
+.topbar-mypage-btn:active {
+  background: rgba(255, 255, 255, 0.26);
 }
 
 .topbar-stats {
-  min-height: 62px;
-  border-radius: 999px;
-  background: var(--pill);
-  border: 1px solid var(--pill-border);
-  color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 0 18px;
-  flex-wrap: wrap;
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 0 6px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.28),
+    0 8px 22px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .stat-chip {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  padding: 9px 14px;
 }
 
 .stat-label {
   color: rgba(255, 255, 255, 0.74);
-  font-size: 0.98rem;
-  font-weight: 800;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .stat-chip strong {
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 18px;
   line-height: 1;
   font-weight: 900;
 }
 
 .stat-divider {
   width: 1px;
-  min-height: 28px;
-  background: rgba(255, 255, 255, 0.18);
+  height: 18px;
+  background: rgba(255, 255, 255, 0.22);
 }
 
 .topbar-reward-row {
   display: flex;
   justify-content: flex-end;
+  pointer-events: auto;
 }
 
 .reward-btn {
-  min-height: 58px;
-  padding: 0 22px;
+  height: 42px;
+  padding: 0 18px;
   border-radius: 999px;
   background: rgba(45, 45, 48, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.76);
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 900;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.28),
+    0 8px 22px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transition:
     transform 0.18s ease,
     background 0.18s ease,
     border-color 0.18s ease,
     color 0.18s ease;
+  pointer-events: auto;
 }
 
 .reward-btn:disabled {
@@ -422,18 +462,19 @@ img {
 @keyframes rewardPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28), 0 0 0 0 rgba(255, 212, 59, 0.12);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28), 0 0 0 0 rgba(255, 212, 59, 0.12);
   }
   50% {
     transform: scale(1.06);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34), 0 0 0 12px rgba(255, 212, 59, 0.08);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.34), 0 0 0 10px rgba(255, 212, 59, 0.08);
   }
 }
 
 /* ─── MAP SHELL / VIEWPORT / STAGE ──────────────────── */
+/* 지도가 앱 화면 전체를 채움 (topbar는 그 위에 fixed) */
 .map-shell {
-  flex: 1;
-  position: relative;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 
@@ -486,7 +527,6 @@ img {
   animation: markerFloat 2.3s ease-in-out infinite;
   animation-delay: var(--marker-delay, 0ms);
   transition: transform 0.18s ease, opacity 0.18s ease;
-  /* prevent map drag from stealing clicks */
   touch-action: auto;
 }
 
@@ -594,27 +634,29 @@ img {
 .modal {
   position: fixed;
   inset: 0;
-  z-index: 40;
+  z-index: 100;
 }
 
 .modal-backdrop {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: rgba(0, 0, 0, 0.58);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .modal-panel {
   position: absolute;
+  z-index: 2;
   left: 50%;
   top: 50%;
-  width: min(calc(100% - 32px), 560px);
+  width: min(92vw, 420px);
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.95);
   color: var(--text);
-  border-radius: 30px;
-  padding: 28px 22px 22px;
+  border-radius: 24px;
+  padding: 22px 18px 18px;
   box-shadow: var(--shadow);
   max-height: calc(100vh - 48px);
   overflow-y: auto;
@@ -622,32 +664,40 @@ img {
 
 .modal-close-x {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 46px;
-  height: 46px;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.06);
   color: #303236;
-  font-size: 2rem;
+  font-size: 22px;
   line-height: 1;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.modal-close-x:active {
+  background: rgba(0, 0, 0, 0.14);
 }
 
 .modal-title {
-  margin: 6px 0 14px;
+  margin: 6px 0 12px;
   text-align: center;
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-size: 24px;
   line-height: 1.12;
   font-weight: 900;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
 }
 
 .modal-desc {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   text-align: center;
-  font-size: 1.04rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.65;
   color: #4a4d53;
 }
 
@@ -656,12 +706,12 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 12px;
   border-radius: 999px;
-  font-size: 0.95rem;
+  font-size: 12px;
   font-weight: 900;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .quiz-badge {
@@ -682,20 +732,20 @@ img {
 
 .quiz-options {
   display: grid;
-  gap: 12px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .quiz-option-btn {
   width: 100%;
-  min-height: 58px;
-  border-radius: 18px;
+  min-height: 52px;
+  border-radius: 16px;
   text-align: left;
-  padding: 14px 16px;
+  padding: 12px 14px;
   background: #f1f4f8;
   border: 2px solid transparent;
   color: #202226;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 800;
   transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
@@ -718,57 +768,59 @@ img {
 }
 
 .quiz-feedback {
-  min-height: 28px;
-  margin: 14px 0 0;
-  font-size: 0.98rem;
+  min-height: 24px;
+  margin: 12px 0 0;
+  font-size: 0.95rem;
   font-weight: 900;
   text-align: center;
 }
 
 .mypage-list {
   display: grid;
-  gap: 14px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .mypage-item {
-  min-height: 64px;
-  border-radius: 18px;
+  min-height: 56px;
+  border-radius: 14px;
   background: #f7f7f8;
-  padding: 0 18px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 }
 
 .mypage-label {
   color: #77787d;
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .mypage-value {
   color: #121316;
-  font-size: 1.14rem;
+  font-size: 14px;
   font-weight: 900;
+  text-align: right;
 }
 
 .reward-desc {
-  margin: 12px 0 22px;
+  margin: 10px 0 18px;
   color: #4a4d53;
-  font-size: 1.04rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.65;
   text-align: center;
 }
 
 .reward-confirm-btn {
   width: 100%;
-  height: 58px;
-  border-radius: 18px;
+  height: 52px;
+  border-radius: 16px;
   background: var(--primary);
   color: #fff;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 900;
 }
 
@@ -776,19 +828,9 @@ img {
 @media (min-width: 768px) {
   .topbar {
     padding:
-      calc(env(safe-area-inset-top) + 18px)
+      calc(var(--safe-top) + 14px)
       28px
-      14px;
-  }
-
-  .topbar-action-row {
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .topbar-reward-row {
-    justify-content: flex-end;
+      10px;
   }
 
   .mission-marker {
@@ -805,6 +847,43 @@ img {
 
   .mission-marker .marker-inner {
     font-size: 1.04rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .topbar-nickname-text,
+  .topbar-brand-text {
+    font-size: 18px;
+  }
+
+  .topbar-nickname-text {
+    max-width: 140px;
+  }
+
+  .topbar-mypage-btn {
+    min-width: 90px;
+    height: 38px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .stat-chip {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .stat-chip strong {
+    font-size: 15px;
+  }
+
+  .reward-btn {
+    height: 38px;
+    padding: 0 14px;
+    font-size: 13px;
   }
 }
 
