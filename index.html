@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <title>2026 영등포공원 정원소풍</title>
+    <meta
+      name="description"
+      content="2026 영등포공원 정원소풍 탐험대"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- 인트로 화면 -->
+    <div id="introScreen" class="intro-screen">
+      <div class="intro-bg-map">
+        <img
+          src="./assets/yeongdeungpo-park-map.png"
+          alt="2026 영등포공원 정원소풍 행사장 지도"
+          class="intro-bg-image"
+          draggable="false"
+        />
+      </div>
+      <div class="intro-overlay"></div>
+
+      <div class="intro-content">
+        <div class="intro-bottom">
+          <h1 class="intro-title">2026 영등포공원<br />정원소풍</h1>
+          <p class="intro-desc">지도 위 이벤트 구역을 탐험하며 퀴즈를 풀어보세요</p>
+
+          <button id="enterTourBtn" class="intro-enter-btn" type="button">
+            탐험 시작하기
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 셋업 화면 -->
+    <div id="setupScreen" class="setup-screen hidden">
+      <div class="setup-bg"></div>
+
+      <div class="setup-card">
+        <div class="setup-logo">정원소품 탐험</div>
+        <h1 class="setup-title">탐험 준비</h1>
+        <p class="setup-desc">닉네임을 입력하고 탐험을 시작해 주세요.</p>
+
+        <div class="setup-field">
+          <label class="setup-label" for="nicknameInput">닉네임</label>
+          <input
+            id="nicknameInput"
+            class="setup-input"
+            type="text"
+            placeholder="닉네임을 입력해 주세요"
+            maxlength="12"
+            autocomplete="off"
+          />
+        </div>
+
+        <button id="tourStartBtn" class="setup-start-btn" type="button" disabled>
+          탐험 시작하기
+        </button>
+      </div>
+    </div>
+
+    <!-- 앱 화면 -->
+    <div id="appScreen" class="app-screen hidden">
+      <div class="app-map-wrap">
+        <img
+          id="mapImage"
+          src="./assets/yeongdeungpo-park-map.png"
+          alt="영등포공원 정원소풍 행사장 지도"
+          class="app-map-image"
+          draggable="false"
+        />
+        <div class="app-map-overlay"></div>
+        <div id="markerLayer" class="marker-layer"></div>
+      </div>
+
+      <header class="topbar">
+        <div class="topbar-title-row">
+          <div class="topbar-title-wrap">
+            <span id="accountName" class="topbar-nickname-text">하나</span>
+            <span class="topbar-brand-text">님의 스탬프투어</span>
+          </div>
+        </div>
+
+        <div class="topbar-action-row">
+          <button id="mypageBtn" class="topbar-mypage-btn" type="button">
+            마이페이지
+          </button>
+
+          <div class="topbar-stats">
+            <div class="stat-chip">
+              <span class="stat-label">완료</span>
+              <strong id="completedCount">0 / 8</strong>
+            </div>
+
+            <div class="stat-divider"></div>
+
+            <div class="stat-chip">
+              <span class="stat-label">남은 여행지</span>
+              <strong id="remainingCount">8</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-reward-row">
+          <button id="rewardBtn" class="reward-btn" type="button" disabled>
+            🎁 탐험 완료 보상 받기
+          </button>
+        </div>
+      </header>
+    </div>
+
+    <!-- 퀴즈 팝업 -->
+    <div id="quizModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close="quiz"></div>
+
+      <div class="modal-panel quiz-panel">
+        <button
+          id="quizCloseBtn"
+          class="modal-close-x"
+          type="button"
+          aria-label="닫기"
+          data-close="quiz"
+        >
+          ×
+        </button>
+
+        <div id="quizBadge" class="quiz-badge">이벤트 구역 1</div>
+        <h2 class="modal-title">퀴즈 풀기</h2>
+        <p id="quizQuestion" class="modal-desc"></p>
+
+        <div id="quizOptions" class="quiz-options"></div>
+        <p id="quizFeedback" class="quiz-feedback"></p>
+      </div>
+    </div>
+
+    <!-- 마이페이지 팝업 -->
+    <div id="mypageModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close="mypage"></div>
+
+      <div class="modal-panel mypage-panel">
+        <button
+          id="mypageCloseBtn"
+          class="modal-close-x"
+          type="button"
+          aria-label="닫기"
+          data-close="mypage"
+        >
+          ×
+        </button>
+
+        <h2 class="modal-title">마이페이지</h2>
+
+        <div class="mypage-list">
+          <div class="mypage-item">
+            <span class="mypage-label">이름</span>
+            <strong id="mypageName" class="mypage-value">-</strong>
+          </div>
+
+          <div class="mypage-item">
+            <span class="mypage-label">완료</span>
+            <strong id="mypageCompleted" class="mypage-value">0 / 8</strong>
+          </div>
+
+          <div class="mypage-item">
+            <span class="mypage-label">남은 여행지</span>
+            <strong id="mypageRemaining" class="mypage-value">8</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 보상 팝업 -->
+    <div id="rewardModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close="reward"></div>
+
+      <div class="modal-panel reward-panel">
+        <button
+          id="rewardCloseBtn"
+          class="modal-close-x"
+          type="button"
+          aria-label="닫기"
+          data-close="reward"
+        >
+          ×
+        </button>
+
+        <div class="reward-badge">보상 안내</div>
+        <h2 class="modal-title">탐험 완료 🎉</h2>
+        <p class="reward-desc">
+          원형광장의 안내소에 방문하여 해당 팝업을 보여주시면 선물을 교환해 드립니다.
+        </p>
+
+        <button class="reward-confirm-btn" type="button" data-close="reward">
+          확인
+        </button>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
