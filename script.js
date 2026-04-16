@@ -49,7 +49,7 @@ const markers = [
     id: 2,
     x: 72,
     y: 28,
-    question: "이 웹사이트의 투어 방식은 무엇인가요?",
+    question: "이 웹사이트의 탐험 방식은 무엇인가요?",
     options: ["지도 위 마커를 눌러 퀴즈를 푼다", "오프라인 종이 제출만 한다", "영상만 시청한다", "전화로만 참여한다"],
     answer: 0,
   },
@@ -82,7 +82,7 @@ const markers = [
     x: 78,
     y: 70,
     question: "모든 퀴즈를 완료하면 어떤 버튼이 활성화되나요?",
-    options: ["투어 코스 보상 받기", "로그인하기", "위치 재설정", "회원탈퇴"],
+    options: ["탐험 완료 보상 받기", "로그인하기", "위치 재설정", "회원탈퇴"],
     answer: 0,
   },
   {
@@ -113,7 +113,6 @@ function saveState() {
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
-
   if (!saved) return;
 
   try {
@@ -168,7 +167,6 @@ function updateProgressUI() {
   mypageRemaining.textContent = String(remaining);
 
   const isAllCompleted = completed === TOTAL_MARKERS;
-
   rewardBtn.disabled = !isAllCompleted;
 
   if (isAllCompleted) {
@@ -190,17 +188,15 @@ function renderMarkers() {
     markerButton.style.left = `${marker.x}%`;
     markerButton.style.top = `${marker.y}%`;
     markerButton.textContent = String(marker.id);
-    markerButton.setAttribute("aria-label", `이벤트 구역 ${marker.id}`);
     markerButton.dataset.markerId = String(marker.id);
+    markerButton.setAttribute("aria-label", `이벤트 구역 ${marker.id}`);
 
     if (isCompleted) {
       markerButton.disabled = true;
       markerButton.title = `이벤트 구역 ${marker.id} 완료`;
     } else {
       markerButton.title = `이벤트 구역 ${marker.id} 퀴즈 열기`;
-      markerButton.addEventListener("click", () => {
-        openQuizModal(marker.id);
-      });
+      markerButton.addEventListener("click", () => openQuizModal(marker.id));
     }
 
     markerLayer.appendChild(markerButton);
@@ -279,7 +275,6 @@ function openMyPageModal() {
 
 function openRewardModal() {
   if (getCompletedCount() !== TOTAL_MARKERS) return;
-
   rewardModal.classList.remove("hidden");
   rewardModal.setAttribute("aria-hidden", "false");
 }
@@ -339,22 +334,34 @@ function bindModalCloseEvents() {
 }
 
 function bindEvents() {
-  enterTourBtn.addEventListener("click", goToSetupScreen);
+  if (enterTourBtn) {
+    enterTourBtn.addEventListener("click", goToSetupScreen);
+  }
 
-  nicknameInput.addEventListener("input", () => {
-    nicknameInput.value = nicknameInput.value.replace(/\n/g, "");
-    updateStartButtonState();
-  });
+  if (nicknameInput) {
+    nicknameInput.addEventListener("input", () => {
+      nicknameInput.value = nicknameInput.value.replace(/\n/g, "");
+      updateStartButtonState();
+    });
 
-  nicknameInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && !tourStartBtn.disabled) {
-      startTour();
-    }
-  });
+    nicknameInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !tourStartBtn.disabled) {
+        startTour();
+      }
+    });
+  }
 
-  tourStartBtn.addEventListener("click", startTour);
-  mypageBtn.addEventListener("click", openMyPageModal);
-  rewardBtn.addEventListener("click", openRewardModal);
+  if (tourStartBtn) {
+    tourStartBtn.addEventListener("click", startTour);
+  }
+
+  if (mypageBtn) {
+    mypageBtn.addEventListener("click", openMyPageModal);
+  }
+
+  if (rewardBtn) {
+    rewardBtn.addEventListener("click", openRewardModal);
+  }
 
   bindModalCloseEvents();
 
