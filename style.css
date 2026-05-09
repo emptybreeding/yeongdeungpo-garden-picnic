@@ -80,19 +80,20 @@ img { -webkit-user-drag: none; user-select: none; }
 .intro-map-wrap {
   flex: 1; min-height: 0;
   position: relative; overflow: hidden;
-  margin-top: 12px;
+  margin-top: 4px;
 }
+/* 이미지를 좌우 풀블리드 — 자연 비율로 너비 100%, 높이는 자동으로 넘침 */
 .intro-map-img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center 20%;
+  width: 100%; height: auto;
   display: block;
+  position: relative; z-index: 0;
 }
 /* 하단 노란색 페이드 */
 .intro-map-fade {
   position: absolute; bottom: 0; left: 0; right: 0;
-  height: 45%;
-  background: linear-gradient(to bottom, transparent 0%, var(--yellow) 100%);
-  pointer-events: none;
+  height: 55%;
+  background: linear-gradient(to bottom, transparent 0%, var(--yellow) 80%);
+  z-index: 1; pointer-events: none;
 }
 
 /* 하단 설명 + 버튼 */
