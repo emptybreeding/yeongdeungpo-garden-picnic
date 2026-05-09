@@ -12,7 +12,7 @@
   </head>
   <body>
 
-    <!-- 인트로 화면 -->
+    <!-- ── 인트로 화면 ───────────────────────────────── -->
     <div id="introScreen" class="intro-screen">
       <div class="intro-bg-map">
         <img
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <!-- 셋업 화면 -->
+    <!-- ── 셋업 화면 ──────────────────────────────────── -->
     <div id="setupScreen" class="setup-screen hidden">
       <div class="setup-bg"></div>
       <span class="setup-deco setup-deco--tl">🌿</span>
@@ -65,10 +65,10 @@
       </div>
     </div>
 
-    <!-- 앱 화면 -->
+    <!-- ── 앱 화면 ────────────────────────────────────── -->
     <div id="appScreen" class="app-screen hidden">
 
-      <!-- 상단 topbar (오버레이) -->
+      <!-- 상단 topbar (오버레이 고정) -->
       <header class="topbar">
         <div class="topbar-title-row">
           <div class="topbar-title-wrap">
@@ -97,7 +97,7 @@
         </div>
       </header>
 
-      <!-- 지도 영역 -->
+      <!-- 지도 영역 (pan & zoom) -->
       <main class="map-shell">
         <div id="mapViewport" class="map-viewport">
           <div id="mapStage" class="map-stage">
@@ -118,9 +118,9 @@
         <p class="app-footer-brand">2026 영등포공원 정원소풍</p>
       </div>
 
-    </div>
+    </div><!-- /appScreen -->
 
-    <!-- 미니게임/퀴즈 팝업 -->
+    <!-- ── 미니게임/퀴즈 팝업 ──────────────────────────── -->
     <div id="quizModal" class="modal hidden" aria-hidden="true">
       <div class="modal-backdrop" data-close="quiz"></div>
       <div class="modal-panel quiz-panel">
@@ -133,7 +133,7 @@
       </div>
     </div>
 
-    <!-- 마이페이지 팝업 -->
+    <!-- ── 마이페이지 팝업 ──────────────────────────────── -->
     <div id="mypageModal" class="modal hidden" aria-hidden="true">
       <div class="modal-backdrop" data-close="mypage"></div>
       <div class="modal-panel mypage-panel">
@@ -156,7 +156,7 @@
       </div>
     </div>
 
-    <!-- 보상 팝업 -->
+    <!-- ── 보상 팝업 ──────────────────────────────────── -->
     <div id="rewardModal" class="modal hidden" aria-hidden="true">
       <div class="modal-backdrop" data-close="reward"></div>
       <div class="modal-panel reward-panel">

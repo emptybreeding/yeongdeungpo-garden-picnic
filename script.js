@@ -12,6 +12,25 @@
   }, { passive: false });
 })();
 
+/* ═══════════════════════════════════════════════════
+   인트로 핀치 줌 방지 (iOS Safari 대응)
+════════════════════════════════════════════════════ */
+(function preventIntroPinchZoom() {
+  // gesturestart: Safari 전용 (핀치/회전 시작)
+  document.addEventListener("gesturestart", function (e) {
+    e.preventDefault();
+  }, { passive: false });
+  // touchmove: 2개 이상 터치 시 기본 동작 차단
+  document.addEventListener("touchmove", function (e) {
+    if (e.touches.length > 1) {
+      const screen = document.getElementById("introScreen");
+      if (screen && !screen.classList.contains("hidden")) {
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+})();
+
 /* ─── DOM refs ─────────────────────────────────────── */
 const introScreen    = document.getElementById("introScreen");
 const setupScreen    = document.getElementById("setupScreen");
@@ -579,7 +598,7 @@ function refreshMarkerState(markerId, animateStamp = false) {
 /* ─── Map pan / zoom ───────────────────────────────── */
 const mapState = {
   naturalWidth: 1024, naturalHeight: 1536,
-  baseScale: 1, zoom: 1, minZoom: 1, maxZoom: 5,
+  baseScale: 1, zoom: 1.3, minZoom: 1.0, maxZoom: 5,
   offsetX: 0, offsetY: 0,
   drag: { active: false, startX: 0, startY: 0, startOffsetX: 0, startOffsetY: 0 },
   pinch: { startDistance: 0, startZoom: 1, centerX: 0, centerY: 0, worldX: 0, worldY: 0 },
