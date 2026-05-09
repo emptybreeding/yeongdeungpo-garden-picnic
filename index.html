@@ -12,7 +12,7 @@
   </head>
   <body>
 
-    <!-- ── 인트로 화면 ───────────────────────────────── -->
+    <!-- ── 인트로 ─────────────────────────────────────── -->
     <div id="introScreen" class="intro-screen">
       <div class="intro-bg-map">
         <img
@@ -25,13 +25,19 @@
       <div class="intro-overlay"></div>
 
       <div class="intro-content">
-        <div class="intro-bottom">
+        <!-- 우상단: 태그라인 · 타이틀 · 날짜 -->
+        <div class="intro-top-right">
           <p class="intro-tagline">초록 정원의 시간을 걷다</p>
           <h1 class="intro-title">
             <span class="intro-title-first">2026 영등포공원</span><br />
             <span class="intro-title-second">정원소풍</span>
           </h1>
-          <p class="intro-meta">6.12(FRI) 14:00 &nbsp;—&nbsp; 6.14(SUN) 19:00 &nbsp;·&nbsp; 영등포공원</p>
+          <p class="intro-meta">6.12(FRI) 14:00 &nbsp;—&nbsp; 6.14(SUN) 19:00<br>영등포공원</p>
+        </div>
+
+        <!-- 하단 중앙: 설명 · 버튼 -->
+        <div class="intro-bottom-center">
+          <p class="intro-subdesc">영등포공원 곳곳을 걸으며 미션을 수행하고<br>정원의 이야기를 발견하세요</p>
           <button id="enterTourBtn" class="intro-enter-btn" type="button">
             탐험 시작하기
           </button>
@@ -39,9 +45,8 @@
       </div>
     </div>
 
-    <!-- ── 셋업 화면 ──────────────────────────────────── -->
+    <!-- ── 셋업 ──────────────────────────────────────── -->
     <div id="setupScreen" class="setup-screen hidden">
-      <div class="setup-bg"></div>
       <span class="setup-deco setup-deco--tl">🌿</span>
       <span class="setup-deco setup-deco--br">🌸</span>
       <div class="setup-card">
@@ -51,12 +56,8 @@
         <div class="setup-field">
           <label class="setup-label" for="nicknameInput">닉네임</label>
           <input
-            id="nicknameInput"
-            class="setup-input"
-            type="text"
-            placeholder="닉네임을 입력해 주세요"
-            maxlength="12"
-            autocomplete="off"
+            id="nicknameInput" class="setup-input" type="text"
+            placeholder="닉네임을 입력해 주세요" maxlength="12" autocomplete="off"
           />
         </div>
         <button id="tourStartBtn" class="setup-start-btn" type="button" disabled>
@@ -68,12 +69,11 @@
     <!-- ── 앱 화면 ────────────────────────────────────── -->
     <div id="appScreen" class="app-screen hidden">
 
-      <!-- 상단 topbar (오버레이 고정) -->
       <header class="topbar">
         <div class="topbar-title-row">
           <div class="topbar-title-wrap">
-            <span id="accountName" class="topbar-nickname-text">하나</span>
-            <span class="topbar-brand-text">님의 소풍탐험대</span>
+            <span id="accountName" class="topbar-nickname-text">하나</span><span class="topbar-nim-text">님의</span>
+            <span class="topbar-brand-text">소풍탐험대</span>
           </div>
         </div>
         <div class="topbar-action-row">
@@ -97,30 +97,25 @@
         </div>
       </header>
 
-      <!-- 지도 영역 (pan & zoom) -->
       <main class="map-shell">
         <div id="mapViewport" class="map-viewport">
           <div id="mapStage" class="map-stage">
-            <img
-              id="mapImage"
-              src="./assets/yeongdeungpo-park-map.png"
-              alt="영등포공원 정원소풍 행사장 지도"
-              draggable="false"
-            />
+            <img id="mapImage" src="./assets/yeongdeungpo-park-map.png"
+              alt="영등포공원 정원소풍 행사장 지도" draggable="false" />
             <div id="markerLayer" class="marker-layer"></div>
           </div>
         </div>
       </main>
 
-      <!-- 하단 고정 행사 타이틀 -->
+      <!-- 하단 고정 타이틀 -->
       <div class="app-footer-title">
         <p class="app-footer-tagline">초록 정원의 시간을 걷다</p>
-        <p class="app-footer-brand">2026 영등포공원 정원소풍</p>
+        <p class="app-footer-brand">2026 영등포공원 <span class="footer-green">정원소풍</span></p>
       </div>
 
-    </div><!-- /appScreen -->
+    </div>
 
-    <!-- ── 미니게임/퀴즈 팝업 ──────────────────────────── -->
+    <!-- ── 퀴즈/미니게임 팝업 ──────────────────────────── -->
     <div id="quizModal" class="modal hidden" aria-hidden="true">
       <div class="modal-backdrop" data-close="quiz"></div>
       <div class="modal-panel quiz-panel">
@@ -163,9 +158,7 @@
         <button id="rewardCloseBtn" class="modal-close-x" type="button" aria-label="닫기" data-close="reward">×</button>
         <div class="reward-badge">보상 안내</div>
         <h2 class="modal-title">탐험 완료 🎉</h2>
-        <p class="reward-desc">
-          원형광장의 안내소에 방문하여 해당 팝업을 보여주시면 선물을 교환해 드립니다.
-        </p>
+        <p class="reward-desc">원형광장의 안내소에 방문하여 해당 팝업을 보여주시면 선물을 교환해 드립니다.</p>
         <button class="reward-confirm-btn" type="button" data-close="reward">확인</button>
       </div>
     </div>
