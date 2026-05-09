@@ -28,7 +28,7 @@ html, body {
   background: var(--yellow);
   font-family: "Pretendard","Apple SD Gothic Neo","Noto Sans KR",
     -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--yellow);
+  color: var(--ink);
   touch-action: manipulation;
 }
 button, input { font: inherit; }
@@ -40,7 +40,7 @@ img { -webkit-user-drag: none; user-select: none; }
 /* ─── INTRO ─────────────────────────────────────────── */
 .intro-screen {
   position: fixed; inset: 0; overflow: hidden;
-  background: #000;
+  background: #F5E118;
   touch-action: manipulation;
 }
 .intro-bg-map {
