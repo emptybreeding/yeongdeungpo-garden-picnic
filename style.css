@@ -64,10 +64,12 @@ img { -webkit-user-drag: none; user-select: none; }
 .intro-title-line1 {
   display: block;
   font-size: clamp(1.4rem, 4.5vw, 2rem);
+  color: var(--ink);
 }
 .intro-title-line2 {
   display: block;
   font-size: clamp(2.4rem, 8vw, 3.4rem);
+  color: var(--green);   /* ← 초록색 */
 }
 .intro-date {
   margin: 0;
@@ -80,13 +82,15 @@ img { -webkit-user-drag: none; user-select: none; }
 .intro-map-wrap {
   flex: 1; min-height: 0;
   position: relative; overflow: hidden;
-  margin-top: 4px;
+  margin-top: 0;
 }
-/* 이미지를 좌우 풀블리드 — 자연 비율로 너비 100%, 높이는 자동으로 넘침 */
+/* 지도를 170% 너비로 확대해 좌우 풀블리드 + 줌인 효과 */
 .intro-map-img {
-  width: 100%; height: auto;
-  display: block;
-  position: relative; z-index: 0;
+  position: absolute;
+  width: 170%; height: auto;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  display: block; z-index: 0;
 }
 /* 하단 노란색 페이드 */
 .intro-map-fade {
@@ -108,11 +112,11 @@ img { -webkit-user-drag: none; user-select: none; }
   color: var(--ink); line-height: 1.7;
 }
 .intro-enter-btn {
-  min-width: 220px; padding: 18px 32px;
+  min-width: 190px; padding: 15px 28px;
   border-radius: 999px;
   background: var(--green); color: #fff;
-  font-size: 1.1rem; font-weight: 900; border: none;
-  box-shadow: 0 8px 24px rgba(76,155,53,.38), 0 2px 8px rgba(0,0,0,.15);
+  font-size: 1.05rem; font-weight: 900; border: none;
+  box-shadow: 0 6px 20px rgba(76,155,53,.35), 0 2px 6px rgba(0,0,0,.12);
   animation: introBounce 1.7s ease-in-out infinite;
 }
 @keyframes introBounce {
