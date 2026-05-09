@@ -72,7 +72,7 @@ const markers = [
     type: "word-input",
     title: "🔤 낱말 퀴즈",
     desc: "영등포공원이 위치한 서울시 자치구 이름은 무엇일까요?",
-    hint: "💡 힌트: 공원 이름 앞부분에 답이 숨어 있어요!  (예: ○○○구)",
+    hint: "💡 힌트: 공원 이름 앞부분에 답이 숨어 있어요!  (예: ○○구)",
     answers: ["영등포구"],
   },
 
@@ -234,7 +234,7 @@ function markComplete(markerId) {
 
 function setFeedback(msg, success) {
   quizFeedback.textContent = msg;
-  quizFeedback.style.color = success ? "#149c56" : "#db4747";
+  quizFeedback.style.color = success ? "#357028" : "#C83820";
 }
 
 /* ════════════════════════════════════════════════════
