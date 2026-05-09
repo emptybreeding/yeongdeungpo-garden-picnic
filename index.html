@@ -14,35 +14,36 @@
 
     <!-- ── 인트로 ─────────────────────────────────────── -->
     <div id="introScreen" class="intro-screen">
-      <div class="intro-bg-map">
+
+      <!-- 상단: 태그라인 · 타이틀 · 날짜 -->
+      <div class="intro-header">
+        <p class="intro-tagline">초록 정원의 시간을 걷다</p>
+        <h1 class="intro-title">
+          <span class="intro-title-line1">2026 영등포공원</span>
+          <span class="intro-title-line2">정원소풍</span>
+        </h1>
+        <p class="intro-date">6.12(FRI) 14:00 &nbsp;—&nbsp; 6.14(SUN) 19:00<br>영등포공원</p>
+      </div>
+
+      <!-- 중앙: 지도 이미지 (하단 노란 페이드) -->
+      <div class="intro-map-wrap">
         <img
           src="./assets/yeongdeungpo-park-map.png"
-          alt="2026 영등포공원 정원소풍 행사장 지도"
-          class="intro-bg-image"
+          alt="영등포공원 지도"
+          class="intro-map-img"
           draggable="false"
         />
+        <div class="intro-map-fade"></div>
       </div>
-      <div class="intro-overlay"></div>
 
-      <div class="intro-content">
-        <!-- 우상단: 태그라인 · 타이틀 · 날짜 -->
-        <div class="intro-top-right">
-          <p class="intro-tagline">초록 정원의 시간을 걷다</p>
-          <h1 class="intro-title">
-            <span class="intro-title-first">2026 영등포공원</span>
-            <span class="intro-title-second">정원소풍</span>
-          </h1>
-          <p class="intro-meta">6.12(FRI) 14:00 &nbsp;—&nbsp; 6.14(SUN) 19:00<br>영등포공원</p>
-        </div>
-
-        <!-- 하단 중앙: 설명 · 버튼 -->
-        <div class="intro-bottom-center">
-          <p class="intro-subdesc">영등포공원 곳곳을 걸으며 미션을 수행하고<br>정원의 이야기를 발견하세요</p>
-          <button id="enterTourBtn" class="intro-enter-btn" type="button">
-            탐험 시작하기
-          </button>
-        </div>
+      <!-- 하단: 설명 · 버튼 -->
+      <div class="intro-bottom">
+        <p class="intro-desc">영등포공원 곳곳을 걸으며 미션을 수행하고<br>정원의 이야기를 발견하세요</p>
+        <button id="enterTourBtn" class="intro-enter-btn" type="button">
+          탐험 시작하기
+        </button>
       </div>
+
     </div>
 
     <!-- ── 셋업 ──────────────────────────────────────── -->
