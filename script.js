@@ -878,10 +878,12 @@ function setupMapDimensions() {
 function fitMapToViewport() {
   const { width: vw, height: vh } = mapViewport.getBoundingClientRect();
   mapState.baseScale = Math.min(vw / mapState.naturalWidth, vh / mapState.naturalHeight);
-  mapState.zoom      = Math.max(mapState.minZoom, Math.min(mapState.zoom, mapState.maxZoom));
+  mapState.zoom      = 1.7;   /* 초기 170% */
   const s = mapState.baseScale * mapState.zoom;
-  mapState.offsetX = (vw - mapState.naturalWidth  * s) / 2;
-  mapState.offsetY = (vh - mapState.naturalHeight * s) / 2;
+  /* 지도 55% 지점이 뷰포트 중앙에 오도록 offsetX 설정 */
+  mapState.offsetX = vw * 0.5 - mapState.naturalWidth  * s * 0.55;
+  /* top -50px */
+  mapState.offsetY = -50;
   clampOffsets();
   applyTransform();
 }
@@ -896,14 +898,20 @@ function clampOffsets() {
   const s  = mapState.baseScale * mapState.zoom;
   const sw = mapState.naturalWidth  * s;
   const sh = mapState.naturalHeight * s;
-  mapState.offsetX = Math.min(
-    sw <= vw ? (vw - sw) / 2 : 0,
-    Math.max(Math.min(0, vw - sw), mapState.offsetX)
-  );
-  mapState.offsetY = Math.min(
-    sh <= vh ? (vh - sh) / 2 : 0,
-    Math.max(Math.min(0, vh - sh), mapState.offsetY)
-  );
+
+  /* X축: 지도가 뷰포트보다 넓으면 [vw-sw .. 0], 좁으면 [0 .. vw-sw] */
+  if (sw >= vw) {
+    mapState.offsetX = Math.max(vw - sw, Math.min(0, mapState.offsetX));
+  } else {
+    mapState.offsetX = Math.max(0, Math.min(vw - sw, mapState.offsetX));
+  }
+
+  /* Y축: 지도가 뷰포트보다 높으면 [vh-sh .. 0], 낮으면 [0 .. vh-sh] */
+  if (sh >= vh) {
+    mapState.offsetY = Math.max(vh - sh, Math.min(0, mapState.offsetY));
+  } else {
+    mapState.offsetY = Math.max(0, Math.min(vh - sh, mapState.offsetY));
+  }
 }
 
 function getDist(p1, p2) { return Math.hypot(p1.clientX - p2.clientX, p1.clientY - p2.clientY); }
