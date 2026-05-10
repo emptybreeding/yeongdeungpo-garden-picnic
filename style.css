@@ -210,17 +210,17 @@ img { -webkit-user-drag: none; user-select: none; }
   letter-spacing: -.04em;
 }
 .topbar-nickname-text {
-  color: var(--ink); font-size: 20px; font-weight: 900;
+  color: var(--ink); font-size: 25px; font-weight: 900;
   text-shadow: 0 2px 8px rgba(245,225,24,.6), 0 1px 3px rgba(255,255,255,.5);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 240px;
 }
 .topbar-nim-text {
-  color: var(--ink-60); font-size: 13px; font-weight: 700;
+  color: var(--ink-60); font-size: 18px; font-weight: 700;
   margin: 0 3px;
   text-shadow: 0 1px 4px rgba(255,255,255,.4);
 }
 .topbar-brand-text {
-  color: var(--green); font-size: 20px; font-weight: 900;
+  color: var(--green); font-size: 25px; font-weight: 900;
   text-shadow: 0 2px 8px rgba(0,0,0,.2);
   white-space: nowrap;
 }
@@ -693,8 +693,8 @@ img { -webkit-user-drag: none; user-select: none; }
 
 /* ─── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 420px) {
-  .topbar-nickname-text, .topbar-brand-text { font-size: 18px; }
-  .topbar-nickname-text { max-width: 140px; }
+  .topbar-nickname-text, .topbar-brand-text { font-size: 25px; }
+  .topbar-nickname-text { max-width: 240px; }
   .topbar-mypage-btn { min-width: 90px; height: 38px; padding: 0 14px; font-size: 13px; }
   .stat-chip { padding: 8px 10px; gap: 6px; }
   .stat-label { font-size: 11px; }
