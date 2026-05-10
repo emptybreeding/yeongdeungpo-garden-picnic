@@ -75,7 +75,7 @@ img { -webkit-user-drag: none; user-select: none; }
   margin: 0;
   font-size: 12px; font-weight: 700;
   color: var(--ink); opacity: .6;
-  line-height: 1.45;
+  line-height: 1.65;
 }
 
 /* 중앙 지도 이미지 */
