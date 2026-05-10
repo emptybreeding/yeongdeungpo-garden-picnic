@@ -63,7 +63,7 @@ img { -webkit-user-drag: none; user-select: none; }
 }
 .intro-title-line1 {
   display: block;
-  font-size: clamp(1.4rem, 4.5vw, 2rem);
+  font-size: clamp(2.1rem, 4.5vw, 2rem);
   color: var(--ink);
 }
 .intro-title-line2 {
@@ -210,17 +210,17 @@ img { -webkit-user-drag: none; user-select: none; }
   letter-spacing: -.04em;
 }
 .topbar-nickname-text {
-  color: var(--ink); font-size: 25px; font-weight: 900;
+  color: var(--ink); font-size: 20px; font-weight: 900;
   text-shadow: 0 2px 8px rgba(245,225,24,.6), 0 1px 3px rgba(255,255,255,.5);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px;
 }
 .topbar-nim-text {
-  color: var(--ink-60); font-size: 20px; font-weight: 700;
+  color: var(--ink-60); font-size: 13px; font-weight: 700;
   margin: 0 3px;
   text-shadow: 0 1px 4px rgba(255,255,255,.4);
 }
 .topbar-brand-text {
-  color: var(--green); font-size: 25px; font-weight: 900;
+  color: var(--green); font-size: 20px; font-weight: 900;
   text-shadow: 0 2px 8px rgba(0,0,0,.2);
   white-space: nowrap;
 }
