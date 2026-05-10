@@ -63,12 +63,12 @@ img { -webkit-user-drag: none; user-select: none; }
 }
 .intro-title-line1 {
   display: block;
-  font-size: clamp(1.6rem, 4.5vw, 2rem);
+  font-size: clamp(2.0rem, 4.5vw, 2rem);
   color: var(--ink);
 }
 .intro-title-line2 {
   display: block;
-  font-size: clamp(2.4rem, 8vw, 3.4rem);
+  font-size: clamp(2.6rem, 8vw, 3.4rem);
   color: var(--green);   /* ← 초록색 */
 }
 .intro-date {
