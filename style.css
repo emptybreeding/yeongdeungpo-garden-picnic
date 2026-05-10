@@ -429,7 +429,7 @@ img { -webkit-user-drag: none; user-select: none; }
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 30px; padding: 0 12px; border-radius: 999px;
   font-size: 12px; font-weight: 900; margin-bottom: 8px;
-  background: var(--ink); color: var(--yellow);
+  background: var(--green); color: var(#fff);
 }
 .quiz-panel, .reward-panel, .mypage-panel { text-align: center; }
 .quiz-feedback {
