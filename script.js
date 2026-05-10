@@ -883,7 +883,7 @@ function fitMapToViewport() {
   /* 지도 55% 지점이 뷰포트 중앙에 오도록 offsetX 설정 */
   mapState.offsetX = vw * 0.5 - mapState.naturalWidth  * s * 0.45;
   /* top -50px */
-  mapState.offsetY = 150;
+  mapState.offsetY = 170;
   clampOffsets();
   applyTransform();
 }
