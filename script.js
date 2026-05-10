@@ -878,12 +878,12 @@ function setupMapDimensions() {
 function fitMapToViewport() {
   const { width: vw, height: vh } = mapViewport.getBoundingClientRect();
   mapState.baseScale = Math.min(vw / mapState.naturalWidth, vh / mapState.naturalHeight);
-  mapState.zoom      = 1.7;   /* 초기 170% */
+  mapState.zoom      = 1.5;   /* 초기 150% */
   const s = mapState.baseScale * mapState.zoom;
   /* 지도 55% 지점이 뷰포트 중앙에 오도록 offsetX 설정 */
-  mapState.offsetX = vw * 0.5 - mapState.naturalWidth  * s * 0.55;
+  mapState.offsetX = vw * 0.5 - mapState.naturalWidth  * s * 0.45;
   /* top -50px */
-  mapState.offsetY = -50;
+  mapState.offsetY = 150;
   clampOffsets();
   applyTransform();
 }
