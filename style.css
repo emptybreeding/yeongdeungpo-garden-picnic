@@ -48,7 +48,7 @@ img { -webkit-user-drag: none; user-select: none; }
 /* 상단 텍스트 영역 */
 .intro-header {
   flex-shrink: 0;
-  padding: calc(var(--safe-top) + 18px) 24px 0;
+  padding: calc(var(--safe-top) + 38px) 24px 0;
   text-align: right;
 }
 .intro-tagline {
@@ -210,17 +210,17 @@ img { -webkit-user-drag: none; user-select: none; }
   letter-spacing: -.04em;
 }
 .topbar-nickname-text {
-  color: var(--ink); font-size: 20px; font-weight: 900;
+  color: var(--ink); font-size: 25px; font-weight: 900;
   text-shadow: 0 2px 8px rgba(245,225,24,.6), 0 1px 3px rgba(255,255,255,.5);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px;
 }
 .topbar-nim-text {
-  color: var(--ink-60); font-size: 13px; font-weight: 700;
+  color: var(--ink-60); font-size: 20px; font-weight: 700;
   margin: 0 3px;
   text-shadow: 0 1px 4px rgba(255,255,255,.4);
 }
 .topbar-brand-text {
-  color: var(--green); font-size: 20px; font-weight: 900;
+  color: var(--green); font-size: 25px; font-weight: 900;
   text-shadow: 0 2px 8px rgba(0,0,0,.2);
   white-space: nowrap;
 }
